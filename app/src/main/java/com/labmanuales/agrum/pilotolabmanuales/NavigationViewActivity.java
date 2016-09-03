@@ -7,10 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.labmanuales.agrum.pilotolabmanuales.fragment.MenuFragment1;
 
 import com.labmanuales.agrum.pilotolabmanuales.fragment.MenuFragment3;
 import com.labmanuales.agrum.pilotolabmanuales.fragment.MenuFragmentCrearCultivo;
+import com.labmanuales.agrum.pilotolabmanuales.fragment.MenuFragmentCrearLabor;
+import com.labmanuales.agrum.pilotolabmanuales.fragment.MenuFragmentCrearUsuario;
 
 
 public class NavigationViewActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class NavigationViewActivity extends AppCompatActivity {
 
         switch (fragment_receiver){
             case "menu1":
-                fragment = new MenuFragment1();
+                fragment = new MenuFragmentCrearUsuario();
                 fragmentTransaction = true;
                 break;
             case "menu2":
@@ -42,9 +43,14 @@ public class NavigationViewActivity extends AppCompatActivity {
                 fragmentTransaction = true;
                 break;
             case "menu3":
+                fragment = new MenuFragmentCrearLabor();
+                fragmentTransaction = true;
+                break;
+            case "menu4":
                 fragment = new MenuFragment3();
                 fragmentTransaction = true;
                 break;
+
         }
 
         if(fragmentTransaction) {

@@ -9,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.view.View.OnClickListener;
 
 import com.labmanuales.agrum.pilotolabmanuales.R;
 
 
-public class MenuFragment3 extends Fragment implements View.OnClickListener {
+public class MenuFragment3 extends Fragment implements OnClickListener {
 
     private Button BtnUsuarios, BtnTerreno;
     private ListView listview;

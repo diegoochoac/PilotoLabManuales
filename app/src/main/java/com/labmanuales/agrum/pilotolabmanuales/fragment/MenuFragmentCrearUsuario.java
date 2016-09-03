@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.labmanuales.agrum.pilotolabmanuales.R;
 
 
-public class MenuFragment1 extends Fragment implements OnClickListener {
+public class MenuFragmentCrearUsuario extends Fragment implements OnClickListener {
 
 
     private EditText nombre, telefono;
@@ -26,7 +26,7 @@ public class MenuFragment1 extends Fragment implements OnClickListener {
     private Button Btnagregar;
     private int request_code = 1;
 
-    public MenuFragment1() {
+    public MenuFragmentCrearUsuario() {
         // Required empty public constructor
     }
 
@@ -34,7 +34,7 @@ public class MenuFragment1 extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.menu_fragment1, container, false);
+        View rootview = inflater.inflate(R.layout.menu_fragment_crear_usuario, container, false);
         inicializarComponentes(rootview);
         return rootview;
     }

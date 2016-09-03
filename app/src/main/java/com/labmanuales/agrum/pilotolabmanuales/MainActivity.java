@@ -100,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 break;
+                            case R.id.menu_seccion_4:
+                                intent = new Intent(MainActivity.this, NavigationViewActivity.class);
+                                intent.putExtra("Fragment", "menu4");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                break;
+
+
+
                             case R.id.menu_opcion_1:
                                 Log.i("NavigationView", "Pulsada opción 1");
                                 break;

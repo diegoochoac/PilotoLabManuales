@@ -1,0 +1,28 @@
+#
+# generated on 2016/09/03 03:39:17
+#
+# --table-start--
+dataClass=com.labmanuales.agrum.pilotolabmanuales.db.Cultivo
+tableName=cultivo
+# --table-fields-start--
+# --field-start--
+fieldName=cultivoId
+columnName=cultivo_id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=cultivoNombre
+columnName=nombre_cultivo
+# --field-end--
+# --field-start--
+fieldName=cultivoArea
+# --field-end--
+# --field-start--
+fieldName=cultivoPlantas
+# --field-end--
+# --field-start--
+fieldName=cultivoFoto
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

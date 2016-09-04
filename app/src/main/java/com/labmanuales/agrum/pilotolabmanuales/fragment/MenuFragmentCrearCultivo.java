@@ -98,15 +98,19 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
         Log.i("FragmentCrearCultivo", "onClick");
         switch (view.getId()) {
             case R.id.btnAgregarCultivo:
-                //Todo: agregar codigo
-                agregarCultivo(
-                        nombre.getText().toString(),
-                        area.getText().toString(),
-                        plantas.getText().toString(),
-                        String.valueOf(foto.getTag())
-                );
-                Toast.makeText(view.getContext(),"Cultivo Agregado", Toast.LENGTH_SHORT).show();
-                limpiarCampos();
+                if(nombre.getText().toString().trim().length() > 0 && area.getText().toString().trim().length() > 0 && plantas.getText().toString().trim().length() > 0) {
+
+                    agregarCultivo(
+                            nombre.getText().toString(),
+                            area.getText().toString(),
+                            plantas.getText().toString(),
+                            String.valueOf(foto.getTag())
+                    );
+                    Toast.makeText(view.getContext(), "Cultivo Agregado", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
+                }else{
+                    Toast.makeText(view.getContext(),"Por favor complete los campos", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.imageCargarCultivo:

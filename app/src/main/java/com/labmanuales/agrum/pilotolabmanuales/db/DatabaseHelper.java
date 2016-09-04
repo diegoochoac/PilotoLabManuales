@@ -22,6 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     //Objeto Dao qye se utiliza para acceder a la tabla usuario
     private Dao<Cultivo,Integer> cultivoDao;
+    private Dao<Usuario, Integer> usuarioDao;
 
 
     public DatabaseHelper(Context context) {
@@ -40,6 +41,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getSimpleName(), "onCreate()");
             TableUtils.createTable(source,Cultivo.class);
+            TableUtils.createTable(source,Usuario.class);
 
         }catch (SQLException ex) {
             Log.e(DatabaseHelper.class.getSimpleName(),"Imposible crear base de datos",ex);
@@ -60,6 +62,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getSimpleName(), "onUpgrade()");
             TableUtils.dropTable(source,Cultivo.class, true);
+            TableUtils.dropTable(source,Usuario.class, true);
             onCreate(db, source);
         } catch (SQLException ex) {
             Log.e(DatabaseHelper.class.getSimpleName(),"Imposible actualizar base de datos",ex);
@@ -75,6 +78,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             cultivoDao = getDao(Cultivo.class);
         }
         return cultivoDao;
+    }
+
+    public Dao<Usuario, Integer> getUsuarioDao() throws  SQLException{
+        if(usuarioDao==null){
+            usuarioDao = getDao(Usuario.class);
+        }
+        return usuarioDao;
     }
 
     //</editor-fold>

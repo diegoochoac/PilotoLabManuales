@@ -10,6 +10,40 @@
         android:layout_height="match_parent"
         android:id="@+id/scrollView" >
 
-    </ScrollView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Crear Labor"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:ems="10"
+                android:id="@+id/cmpNombreLabor"
+                android:layout_marginTop="5dp"
+                android:hint="Nombre"
+                android:layout_marginLeft="10dp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:text="Agregar"
+                android:id="@+id/btnAgregarLabor"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

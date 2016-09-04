@@ -16,15 +16,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.labmanuales.agrum.pilotolabmanuales.R;
 import com.labmanuales.agrum.pilotolabmanuales.db.Cultivo;
-import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseHelper;
-import com.labmanuales.agrum.pilotolabmanuales.fragment.utils.ListCultivosAdapter;
-
-import java.sql.SQLException;
-import java.util.List;
+import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseCrud;
 
 public class MenuFragmentCrearCultivo extends Fragment implements OnClickListener{
 
@@ -34,10 +28,9 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
     private Button Btnagregar;
     private int request_code = 1;
 
-    private DatabaseHelper databaseHelper = null;
-    private Dao<Cultivo,Integer> cultivoDao;
-    private List<Cultivo> cultivoList;
-    private ListCultivosAdapter adapterCultivo = null;
+    private DatabaseCrud database;
+
+
 
 
     public MenuFragmentCrearCultivo() {
@@ -49,26 +42,11 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment_crear_cultivo, container, false);
+        database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
         return rootview;
     }
 
-    protected DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("FragmentCrearCultivo", "onDestroy");
-        super.onDestroy();
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
-    }
 
     @Override
     public void onPause() {
@@ -79,6 +57,7 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
     @Override
     public void onStop() {
         Log.i("FragmentCrearCultivo", "onStop");
+        database.releaseHelper();
         super.onStop();
     }
 
@@ -99,7 +78,6 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
         switch (view.getId()) {
             case R.id.btnAgregarCultivo:
                 if(nombre.getText().toString().trim().length() > 0 && area.getText().toString().trim().length() > 0 && plantas.getText().toString().trim().length() > 0) {
-
                     agregarCultivo(
                             nombre.getText().toString(),
                             area.getText().toString(),
@@ -131,12 +109,7 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
 
     public void agregarCultivo(String nombre, String area, String plantas, String foto){
         Cultivo nuevo = new Cultivo(nombre, area, plantas, foto);
-        try{
-            cultivoDao = getHelper().getCultivoDao();
-            cultivoDao.create(nuevo);
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
+        database.crearCultivo(nuevo);
     }
 
     public void limpiarCampos(){

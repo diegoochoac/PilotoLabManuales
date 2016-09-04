@@ -14,16 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.labmanuales.agrum.pilotolabmanuales.R;
-import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseHelper;
+import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseCrud;
 import com.labmanuales.agrum.pilotolabmanuales.db.Usuario;
-
-import java.sql.SQLException;
 
 
 public class MenuFragmentCrearUsuario extends Fragment implements OnClickListener {
@@ -35,9 +30,7 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
     private String tipoUsuario = "";
     private Button Btnagregar;
     private int request_code = 1;
-
-    private DatabaseHelper databaseHelper = null;
-    private Dao<Usuario,Integer> usuarioDao;
+    private DatabaseCrud database;
 
     public MenuFragmentCrearUsuario() {
         // Required empty public constructor
@@ -48,25 +41,9 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment_crear_usuario, container, false);
+        database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
         return rootview;
-    }
-
-    protected DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("FragmentCrearUsuario", "onDestroy");
-        super.onDestroy();
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
     }
 
     @Override
@@ -78,6 +55,7 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
     @Override
     public void onStop() {
         Log.i("FragmentCrearUsuario", "onStop");
+        database.releaseHelper();
         super.onStop();
     }
 
@@ -145,13 +123,7 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
 
     public void agregarUsuario(String nombre, String telefono,String tipo, String foto){
         Usuario nuevo = new Usuario(nombre,telefono,tipo,foto);
-        try{
-            usuarioDao = getHelper().getUsuarioDao();
-            usuarioDao.create(nuevo);
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        database.crearUsuario(nuevo);
     }
 
     public void limpiarCampos(){

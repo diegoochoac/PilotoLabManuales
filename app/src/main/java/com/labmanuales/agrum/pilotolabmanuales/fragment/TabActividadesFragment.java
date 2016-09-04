@@ -12,17 +12,17 @@ import com.labmanuales.agrum.pilotolabmanuales.R;
 /**
  * Created by diego on 1/09/16.
  */
-public class ActividadesFragment extends Fragment implements OnClickListener {
+public class TabActividadesFragment extends Fragment implements OnClickListener {
 
 
-    public ActividadesFragment() {
+    public TabActividadesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.actividades_fragment, container, false);
+        View rootview = inflater.inflate(R.layout.tab_fragment_actividades, container, false);
         inicializarComponentes(rootview);
         return rootview;
     }

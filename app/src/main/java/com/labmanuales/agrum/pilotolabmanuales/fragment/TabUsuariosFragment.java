@@ -12,63 +12,38 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.labmanuales.agrum.pilotolabmanuales.R;
-import com.labmanuales.agrum.pilotolabmanuales.db.Cultivo;
-import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseHelper;
-import com.labmanuales.agrum.pilotolabmanuales.fragment.utils.ListCultivosAdapter;
+import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseCrud;
+import com.labmanuales.agrum.pilotolabmanuales.db.Usuario;
+import com.labmanuales.agrum.pilotolabmanuales.fragment.utils.ListUsuariosAdapter;
 
-
-import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by diego on 1/09/16.
+ * Created by diego on 4/09/16.
  */
-public class CultivosFragment extends Fragment implements OnClickListener {
+public class TabUsuariosFragment extends Fragment implements OnClickListener{
 
-    private DatabaseHelper databaseHelper = null;
-    private Dao<Cultivo,Integer> cultivoDao;
-    private List<Cultivo> cultivoList;
-    private ListCultivosAdapter adapterCultivo = null;
+    private DatabaseCrud database;
+    private List<Usuario> usuarioList;
+    private ListUsuariosAdapter adapterUsuario= null;
 
 
     private ListView listView;
-
     Context thiscontext;
 
-
-    public CultivosFragment() {
+    public TabUsuariosFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.cultivos_fragment, container, false);
+        View rootview = inflater.inflate(R.layout.tab_fragment_usuarios, container, false);
+        database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
         thiscontext = container.getContext();
         return rootview;
-    }
-
-
-    private DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper = OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i("CultivosFragment", "onDestroy");
-        super.onDestroy();
-        if (databaseHelper != null) {
-            OpenHelperManager.releaseHelper();
-            databaseHelper = null;
-        }
     }
 
     @Override
@@ -84,10 +59,18 @@ public class CultivosFragment extends Fragment implements OnClickListener {
         super.onPause();
     }
 
+    @Override
+    public void onStop() {
+        Log.i("UsuariosFragment", "onStop");
+        database.releaseHelper();
+        super.onStop();
+    }
+
+
     private void inicializarComponentes(View view) {
 
 
-        listView = (ListView) view.findViewById(R.id.listViewCultivo);
+        listView = (ListView) view.findViewById(R.id.listViewUsuario);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int i, long l) {
@@ -102,26 +85,18 @@ public class CultivosFragment extends Fragment implements OnClickListener {
                 return false;
             }
         });
-
-        //poblarLista();
     }
 
     public void poblarLista(){
         //Consulta los cultivos que se crean para visualizarlos en pantalla
-        try{
-            Log.i("datossssss", "datos:"+cultivoList);
-            cultivoDao = getHelper().getCultivoDao();
-            cultivoList = cultivoDao.queryForAll();
-            if(cultivoList.size()>0){
-                adapterCultivo = new ListCultivosAdapter(thiscontext,R.layout.list_cultivo_row,cultivoList);
-                listView.setAdapter(adapterCultivo);
-            }
-
-        }catch (SQLException e) {
-            e.printStackTrace();
+        usuarioList = database.obtenerUsuarios();
+        Log.i("UsuariosFragment", "poblarLista tamaño: "+usuarioList.size());
+        if(usuarioList.size()>0 && usuarioList !=null){
+            adapterUsuario = new ListUsuariosAdapter(thiscontext,R.layout.list_usuario_row,usuarioList);
+            listView.setAdapter(adapterUsuario);
         }
-    }
 
+    }
 
     @Override
     public void onClick(View view) {

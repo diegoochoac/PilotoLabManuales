@@ -19,5 +19,6 @@
     <!--MainActivity-->
     <string name="tab1">Cultivos</string>
     <string name="tab2">Actividades</string>
+    <string name="tab3">Usuarios</string>
 
 </resources>

@@ -20,12 +20,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                CultivosFragment cultivostab = new CultivosFragment();
+                TabCultivosFragment cultivostab = new TabCultivosFragment();
                 return cultivostab;
             case 1:
-                ActividadesFragment actividadestab = new ActividadesFragment();
+                TabActividadesFragment actividadestab = new TabActividadesFragment();
                 return actividadestab;
-
+            case 2:
+                TabUsuariosFragment usuariostab = new TabUsuariosFragment();
+                return usuariostab;
             default:
                 return null;
         }

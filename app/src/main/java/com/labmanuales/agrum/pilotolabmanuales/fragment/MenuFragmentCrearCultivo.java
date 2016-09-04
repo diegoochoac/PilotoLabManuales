@@ -30,9 +30,6 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
 
     private DatabaseCrud database;
 
-
-
-
     public MenuFragmentCrearCultivo() {
         // Required empty public constructor
     }
@@ -40,7 +37,6 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment_crear_cultivo, container, false);
         database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
@@ -70,7 +66,6 @@ public class MenuFragmentCrearCultivo extends Fragment implements OnClickListene
         Btnagregar= (Button)view.findViewById(R.id.btnAgregarCultivo);
         Btnagregar.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View view) {

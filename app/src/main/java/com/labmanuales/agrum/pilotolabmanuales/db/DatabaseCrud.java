@@ -3,8 +3,12 @@ package com.labmanuales.agrum.pilotolabmanuales.db;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -91,6 +95,41 @@ public class DatabaseCrud {
         }
         return null;
     }
+
+    public String composeJSONfromSQLiteUsuario(){
+        List<Usuario> listaNoSincronizados = null;
+        try {
+            listaNoSincronizados = usuarioDao.queryBuilder().where().eq("updateState","No").query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(listaNoSincronizados);
+    }
+
+    public int dbSyncCountUsuario() {
+        int count = 0;
+        try {
+            return (int) usuarioDao.queryBuilder().where().eq("updateState","No").countOf();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public void updateSyncStatusUsuario(String id, String status) {
+        try {
+            UpdateBuilder<Usuario,Integer> actualizar = usuarioDao.updateBuilder();
+            actualizar.where().eq("usuario_id",id);
+            actualizar.updateColumnValue("updateState",status);
+            actualizar.update();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="CRUD Cultivo">
@@ -174,9 +213,6 @@ public class DatabaseCrud {
         return null;
     }
     //</editor-fold>
-
-
-
 
 
 

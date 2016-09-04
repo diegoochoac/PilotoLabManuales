@@ -30,14 +30,11 @@ public class MenuFragmentCrearLabor extends Fragment implements OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment_crear_labor, container, false);
         database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
         return rootview;
     }
-
-
 
     @Override
     public void onPause() {
@@ -58,10 +55,8 @@ public class MenuFragmentCrearLabor extends Fragment implements OnClickListener 
         Btnagregar.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.btnAgregarLabor:
                 if(nombre.getText().toString().trim().length() > 0){
@@ -80,12 +75,10 @@ public class MenuFragmentCrearLabor extends Fragment implements OnClickListener 
     private void agregarLabor(String nombre) {
         Labor nuevo = new Labor(nombre);
         database.crearLabor(nuevo);
-
     }
 
     public void limpiarCampos(){
         nombre.getText().clear();
     }
-
 
 }

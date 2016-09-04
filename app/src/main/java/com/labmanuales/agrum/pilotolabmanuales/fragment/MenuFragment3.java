@@ -18,8 +18,6 @@ public class MenuFragment3 extends Fragment implements OnClickListener {
 
     private Button BtnUsuarios, BtnTerreno;
     private ListView listview;
-
-
     Context thiscontext;
 
     public MenuFragment3() {
@@ -29,7 +27,6 @@ public class MenuFragment3 extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment3, container, false);
         setHasOptionsMenu(true);        //habilitar el action Bar para tener botones
         inicializarComponentes(rootview);
@@ -37,17 +34,12 @@ public class MenuFragment3 extends Fragment implements OnClickListener {
         return rootview;
     }
 
-
-
     private void inicializarComponentes(View view) {
-
         listview = (ListView) view.findViewById(R.id.listViewfragment);
-
         BtnUsuarios = (Button)view.findViewById(R.id.btnUsuarios);
         BtnTerreno = (Button)view.findViewById(R.id.btnTerreno);
         BtnUsuarios.setOnClickListener(this);
         BtnTerreno.setOnClickListener(this);
-
     }
 
     @Override
@@ -60,11 +52,9 @@ public class MenuFragment3 extends Fragment implements OnClickListener {
         super.onPause();
     }
 
-
     @Override
     public void onClick(View view) {
         Log.i("MenuFragment3", "onClick");
-
         switch (view.getId()) {
             case R.id.btnUsuarios:
 
@@ -74,6 +64,5 @@ public class MenuFragment3 extends Fragment implements OnClickListener {
                 break;
         }
     }
-
 
 }

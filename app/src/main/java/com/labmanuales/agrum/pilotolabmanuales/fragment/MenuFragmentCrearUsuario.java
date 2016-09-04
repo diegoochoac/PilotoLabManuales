@@ -39,7 +39,6 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.menu_fragment_crear_usuario, container, false);
         database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
@@ -49,6 +48,7 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
     @Override
     public void onPause() {
         Log.i("FragmentCrearUsuario", "onPause");
+        database.releaseHelper();
         super.onPause();
     }
 
@@ -68,11 +68,9 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
         externo.setOnClickListener(this);
         foto = (ImageView)view.findViewById(R.id.imageViewCargarUsuario);
         foto.setOnClickListener(this);
-
         Btnagregar= (Button)view.findViewById(R.id.btnAgregarUsuario);
         Btnagregar.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View view) {
@@ -92,7 +90,6 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
                 }else{
                     Toast.makeText(view.getContext(),"Por favor complete los campos", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
 
             case R.id.imageViewCargarUsuario:
@@ -122,7 +119,7 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
     }
 
     public void agregarUsuario(String nombre, String telefono,String tipo, String foto){
-        Usuario nuevo = new Usuario(nombre,telefono,tipo,foto);
+        Usuario nuevo = new Usuario(nombre,telefono,tipo,foto,"No");
         database.crearUsuario(nuevo);
     }
 
@@ -133,7 +130,6 @@ public class MenuFragmentCrearUsuario extends Fragment implements OnClickListene
         interno.setChecked(false);
         externo.setChecked(false);
         foto.setImageResource(R.drawable.ic_user);
-
     }
 
     @Override

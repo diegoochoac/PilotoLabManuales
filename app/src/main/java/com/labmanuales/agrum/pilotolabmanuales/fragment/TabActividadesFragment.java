@@ -21,7 +21,6 @@ public class TabActividadesFragment extends Fragment implements OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.tab_fragment_actividades, container, false);
         inicializarComponentes(rootview);
         return rootview;

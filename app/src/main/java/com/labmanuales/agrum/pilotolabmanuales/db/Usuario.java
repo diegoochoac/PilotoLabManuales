@@ -11,6 +11,7 @@ public class Usuario implements Serializable {
 
     public static final String ID = "usuario_id";
     public static final String NOMBRE = "nombre_usuario";
+    public static final String STATE = "updateState";
 
     @DatabaseField(generatedId = true, columnName = ID)
     private int usuarioId;
@@ -27,14 +28,18 @@ public class Usuario implements Serializable {
     @DatabaseField
     private String usuarioFoto;
 
+    @DatabaseField(columnName = STATE)
+    private String updateState;
+
     public Usuario() {
     }
 
-    public Usuario(String usuarioNombre, String usuarioTelefono, String usuarioTipo, String usuarioFoto) {
+    public Usuario(String usuarioNombre, String usuarioTelefono, String usuarioTipo, String usuarioFoto, String state) {
         this.usuarioNombre = usuarioNombre;
         this.usuarioTelefono = usuarioTelefono;
         this.usuarioTipo = usuarioTipo;
         this.usuarioFoto = usuarioFoto;
+        this.updateState = state;
     }
 
     //<editor-fold desc="Metodos Get-Set">
@@ -77,5 +82,14 @@ public class Usuario implements Serializable {
     public void setUsuarioFoto(String usuarioFoto) {
         this.usuarioFoto = usuarioFoto;
     }
+
+    public String getUpdateState() {
+        return updateState;
+    }
+
+    public void setUpdateState(String updateState) {
+        this.updateState = updateState;
+    }
+
     //</editor-fold>
 }

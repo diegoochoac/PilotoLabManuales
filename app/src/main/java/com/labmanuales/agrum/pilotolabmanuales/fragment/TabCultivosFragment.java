@@ -40,7 +40,6 @@ public class TabCultivosFragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.tab_fragment_cultivos, container, false);
         database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
@@ -64,13 +63,10 @@ public class TabCultivosFragment extends Fragment implements OnClickListener {
     @Override
     public void onStop() {
         Log.i("CultivosFragment", "onStop");
-        database.releaseHelper();
         super.onStop();
     }
 
     private void inicializarComponentes(View view) {
-
-
         listView = (ListView) view.findViewById(R.id.listViewCultivo);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,8 +82,6 @@ public class TabCultivosFragment extends Fragment implements OnClickListener {
                 return false;
             }
         });
-
-        //poblarLista();
     }
 
     public void poblarLista(){
@@ -99,7 +93,6 @@ public class TabCultivosFragment extends Fragment implements OnClickListener {
             listView.setAdapter(adapterCultivo);
         }
     }
-
 
     @Override
     public void onClick(View view) {

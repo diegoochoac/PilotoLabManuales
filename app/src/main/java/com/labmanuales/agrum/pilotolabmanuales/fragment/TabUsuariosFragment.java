@@ -17,7 +17,12 @@ import com.labmanuales.agrum.pilotolabmanuales.db.DatabaseCrud;
 import com.labmanuales.agrum.pilotolabmanuales.db.Usuario;
 import com.labmanuales.agrum.pilotolabmanuales.fragment.utils.ListUsuariosAdapter;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+
 import java.util.List;
+
+
 
 /**
  * Created by diego on 4/09/16.
@@ -28,7 +33,6 @@ public class TabUsuariosFragment extends Fragment implements OnClickListener{
     private List<Usuario> usuarioList;
     private ListUsuariosAdapter adapterUsuario= null;
 
-
     private ListView listView;
     Context thiscontext;
 
@@ -38,7 +42,6 @@ public class TabUsuariosFragment extends Fragment implements OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.tab_fragment_usuarios, container, false);
         database = new DatabaseCrud(container.getContext());
         inicializarComponentes(rootview);
@@ -66,15 +69,14 @@ public class TabUsuariosFragment extends Fragment implements OnClickListener{
         super.onStop();
     }
 
-
     private void inicializarComponentes(View view) {
-
-
         listView = (ListView) view.findViewById(R.id.listViewUsuario);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int i, long l) {
-                Toast.makeText(thiscontext, "presiono " + i, Toast.LENGTH_SHORT).show();
+                int id = adapterUsuario.getItem(i).getUsuarioId();
+                database.updateSyncStatusUsuario(String.valueOf(id),"Si");
+                poblarLista(); //TODO:Cambiar aqui no se realiza la actualizacion
             }
         });
 
@@ -95,11 +97,33 @@ public class TabUsuariosFragment extends Fragment implements OnClickListener{
             adapterUsuario = new ListUsuariosAdapter(thiscontext,R.layout.list_usuario_row,usuarioList);
             listView.setAdapter(adapterUsuario);
         }
-
+        Log.i("UsuariosFragment", "No sincronizados: "+database.dbSyncCountUsuario());
     }
 
     @Override
     public void onClick(View view) {
 
+
     }
+
+    public void syncSQLiteMySQLDB(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        if(usuarioList.size()!=0){
+            if(database.dbSyncCountUsuario()!=0){
+
+                params.put("usersJSON", database.composeJSONfromSQLiteUsuario());
+
+
+            }else{
+                Toast.makeText(thiscontext, "SQLite and Remote MySQL DBs are in Sync!", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(thiscontext, "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
 }

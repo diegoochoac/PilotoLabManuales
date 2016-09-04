@@ -55,8 +55,8 @@ public class ListUsuariosAdapter extends ArrayAdapter<Usuario> {
 
         if(null!=holder.nombre && null!=obj && obj.getUsuarioNombre().length()!=0){
             holder.nombre.setText(obj.getUsuarioNombre());
-            holder.campo2.setText("??: "); //TODO: colocar otra informacion puede ser el tiempo en horas
-            holder.campo3.setText("??? "); //TODO: colocar otra informacion puede ser el tiempo en horas
+            holder.campo2.setText("Telefono: "+obj.getUsuarioTelefono()); //TODO: colocar otra informacion puede ser el tiempo en horas
+            holder.campo3.setText("Sincrinizado: "+obj.getUpdateState()); //TODO: colocar otra informacion puede ser el tiempo en horas
             //holder.imagen.setImageResource(Integer.parseInt(obj.getCultivoFoto())); ///TODO:Falta mostrar la imagen
         }
         return view;

@@ -15,6 +15,7 @@
     <string name="otras_opciones">Otras opciones</string>
     <string name="opcion_1">Configuración</string>
     <string name="opcion_2">Contactenos</string>
+    <string name="opcion_3">Mapa</string>
 
     <!--MainActivity-->
     <string name="tab1">Cultivos</string>

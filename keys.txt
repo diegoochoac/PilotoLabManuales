@@ -1,0 +1,39 @@
+11:52:02 PM: Executing external task 'signingReport'...
+Configuration on demand is an incubating feature.
+Incremental java compilation is an incubating feature.
+:app:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: /home/diego/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: FE:FC:F0:41:06:39:1D:C6:0D:01:51:54:D2:4C:1A:E2
+SHA1: 44:6D:D1:BD:AD:3D:54:A3:DA:CB:35:42:F7:4E:E6:92:03:5D:B3:56
+Valid until: viernes 17 de agosto de 2046
+----------
+Variant: releaseUnitTest
+Config: none
+----------
+Variant: release
+Config: none
+----------
+Variant: debug
+Config: debug
+Store: /home/diego/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: FE:FC:F0:41:06:39:1D:C6:0D:01:51:54:D2:4C:1A:E2
+SHA1: 44:6D:D1:BD:AD:3D:54:A3:DA:CB:35:42:F7:4E:E6:92:03:5D:B3:56
+Valid until: viernes 17 de agosto de 2046
+----------
+Variant: debugUnitTest
+Config: debug
+Store: /home/diego/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: FE:FC:F0:41:06:39:1D:C6:0D:01:51:54:D2:4C:1A:E2
+SHA1: 44:6D:D1:BD:AD:3D:54:A3:DA:CB:35:42:F7:4E:E6:92:03:5D:B3:56
+Valid until: viernes 17 de agosto de 2046
+----------
+
+BUILD SUCCESSFUL
+
+claveAPIII
+AIzaSyC8zYm9gJ10XUngLwdfWV85x5uEAR3c3Eo

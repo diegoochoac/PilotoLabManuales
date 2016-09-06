@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navView = (NavigationView)findViewById(R.id.navview);
-        //<editor-fold desc="setNavigationItemSelectedListener">
+
+        //<editor-fold desc="Metodos Menu Lateral Izquierdo">
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -116,9 +117,13 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.menu_opcion_2:
                                 Log.i("NavigationView", "Pulsada opción 2");
                                 break;
+                            case R.id.menu_opcion_3:
+                                Log.i("NavigationView", "Pulsada opción 3");
+                                intent = new Intent(MainActivity.this, MapActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                break;
                         }
-
-
 
                         drawerLayout.closeDrawers();
 
@@ -126,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         //</editor-fold>
-
     }
-
 
     //<editor-fold desc="Metodos Menu">
     @Override
